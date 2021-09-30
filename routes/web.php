@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 Route::get('/', DashboardController::class);
+
+// ログイン (Google OAuth)
+Route::get('/auth/google/redirect', [GoogleLoginController::class, 'getGoogleAuth']);
+Route::get('/login/google/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+
+// ログアウト
+Route::get('/logout', LogoutController::class);
