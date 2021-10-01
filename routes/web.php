@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', DashboardController::class);
+Route::get('/', DashboardController::class)->name('login');
 
 // ログイン (Google OAuth)
 Route::get('/auth/google/redirect', [GoogleLoginController::class, 'getGoogleAuth']);
