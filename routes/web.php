@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ApiTokenController;
+use App\Http\Controllers\CreateApiTokenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +26,10 @@ Route::get('/login/google/callback', [GoogleLoginController::class, 'authGoogleC
 
 // ログアウト
 Route::get('/logout', LogoutController::class);
+
+// セッティング
+Route::get('/settings/', SettingsController::class);
+
+// セッティング > API Token
+Route::get('/settings/api-token', ApiTokenController::class);
+Route::post('/settings/api-token/create', CreateApiTokenController::class);

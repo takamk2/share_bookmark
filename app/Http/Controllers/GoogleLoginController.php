@@ -26,9 +26,6 @@ class GoogleLoginController extends Controller
         ]);
         Auth::login($user, true);
 
-        $token = $user->createToken('api');
-        logger($token);
-
         return redirect('/');
     }
 }
