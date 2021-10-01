@@ -1,0 +1,31 @@
+CREATE TABLE documents
+(
+    id      SERIAL PRIMARY KEY,
+    content TEXT,
+    FULLTEXT (content) WITH PARSER ngram
+) CHARACTER SET utf8;
+
+drop table documents;
+
+INSERT INTO documents (content) VALUES ('すもももももももものうち'), ('おおきなももがどんぶらこ、どんぶらことながれてきました'), ('むかしむかしあるところにおじいさんとおばあさんがいました');
+
+SELECT * FROM documents WHERE MATCH (content) AGAINST ('なもも');
+
+SELECT *, MATCH (content) AGAINST ('むかし' IN NATURAL LANGUAGE MODE) as score FROM documents;
+
+SELECT * FROM documents WHERE MATCH (content) AGAINST ('どんぶらこ' IN NATURAL LANGUAGE MODE);
+SELECT * FROM documents WHERE MATCH (content) AGAINST ('すもも' IN NATURAL LANGUAGE MODE);
+
+SELECT * FROM documents WHERE MATCH (content) AGAINST ('+もも -すもも' IN BOOLEAN MODE);
+
+SELECT * FROM documents WHERE MATCH (content) AGAINST ('どんぶらこ' IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION);
+
+
+# 複数のAND条件
+SELECT * FROM documents WHERE MATCH (content) AGAINST ('+もも +どんぶら' IN BOOLEAN MODE);
+
+# 複数カラムを参照
+
+# インデックスの確認
+SET GLOBAL innodb_ft_aux_table = 'example_app/documents';
+SELECT * FROM INFORMATION_SCHEMA.INNODB_FT_INDEX_CACHE;
