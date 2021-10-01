@@ -1,0 +1,24 @@
+POST http://localhost:80/api/bookmarks/add
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer oi8oxCx7okKK3akxF6AB3ShPvehquqU2OAC7d72y
+
+title=share bookmark&url=http://localhost&description=ブックマーク共有サービス
+
+###
+
+POST http://localhost:80/api/bookmarks/add
+Content-Type: application/json
+Authorization: Bearer oi8oxCx7okKK3akxF6AB3ShPvehquqU2OAC7d72y
+
+{
+    "title": "こんにちは",
+    "url": "https://google.com",
+    "description": "グーグル"
+}
+
+###
+GET http://localhost/api/user
+Accept: application/json
+Authorization: Bearer oi8oxCx7okKK3akxF6AB3ShPvehquqU2OAC7d72y
+
+###
